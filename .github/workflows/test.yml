@@ -23,14 +23,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: build
-      run: AFL_USE_ASAN=1 afl-clang-fast -o test.afl test.c
+      run: AFL_USE_ASAN=1 afl-clang-fast -o test_afl test.c
     - name: Fuzz config
       run: mkdir -p in && mkdir -p out && echo "A" > in/1
-    - name: Check for dirs
-      run: |
-          pwd 
-          ls -1
-          echo ${{ github.workspace }}
-          echo $GITHUB_WORKSPACE
+#          echo ${{ github.workspace }}
     - name: Fuzz
       run: afl-fuzz -i in -o out -- ./test_afl
