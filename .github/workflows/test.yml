@@ -11,7 +11,7 @@ jobs:
 
     runs-on: ubuntu-latest
     container:
-      image: mimicria/afler:2204
+      image: mimicria/afler:ub2204
 #      env:
 #        NODE_ENV: development
 #      ports:
