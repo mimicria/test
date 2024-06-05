@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: Test fuzzing
 
 on:
   push:
@@ -27,7 +27,9 @@ jobs:
     - name: Fuzz config
       run: mkdir -p in && mkdir -p out && echo "A" > in/1
     - name: Check for dirs
-      run: pwd && ls -1
+      run: |
+          pwd 
+          ls -1
           echo ${{ github.workspace }}
           echo $GITHUB_WORKSPACE
     - name: Fuzz
