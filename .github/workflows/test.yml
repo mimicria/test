@@ -24,4 +24,8 @@ jobs:
     - name: Check for dockerenv file
       run: (ls /.dockerenv && echo Found dockerenv) || (echo No dockerenv)
     - name: build
-      run: afl-clang-fast -o test.afl test.c
+      run: AFL_USE_ASAN=1 afl-clang-fast -o test.afl test.c
+    - name: fuzz config
+      run: mkdir -p in && mkdir -p out && echo "A" > in/1
+    - name: fuzz
+      run: AFL_BENCH_UNTIL_CRASH=1 afl-fuzz -i in -o out -- ./test_afl
