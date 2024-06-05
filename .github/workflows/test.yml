@@ -1,0 +1,27 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    container:
+      image: mimicria/afler:2204
+#      env:
+#        NODE_ENV: development
+#      ports:
+#        - 80
+#      volumes:
+#        - my_docker_volume:/volume_mount
+#      options: --cpus 1
+    steps:
+    - uses: actions/checkout@v4
+    - name: Check for dockerenv file
+      run: (ls /.dockerenv && echo Found dockerenv) || (echo No dockerenv)
+    - name: build
+      run: afl-clang-fast -o test.afl test.c
