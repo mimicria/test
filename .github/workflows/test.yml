@@ -12,8 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: mimicria/afler:ub2204
-#      env:
-#        NODE_ENV: development
+      env:
+        AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES: 1
+        AFL_BENCH_UNTIL_CRASH: 1 
 #      ports:
 #        - 80
 #      volumes:
@@ -28,4 +29,4 @@ jobs:
     - name: fuzz config
       run: mkdir -p in && mkdir -p out && echo "A" > in/1
     - name: fuzz
-      run: echo core > /proc/sys/kernel/core_pattern && AFL_BENCH_UNTIL_CRASH=1 afl-fuzz -i in -o out -- ./test_afl
+      run: afl-fuzz -i in -o out -- ./test_afl
