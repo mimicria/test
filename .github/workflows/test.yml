@@ -28,5 +28,4 @@ jobs:
     - name: fuzz config
       run: mkdir -p in && mkdir -p out && echo "A" > in/1
     - name: fuzz
-      run: echo core > /proc/sys/kernel/core_pattern && \
-      AFL_BENCH_UNTIL_CRASH=1 afl-fuzz -i in -o out -- ./test_afl
+      run: echo core > /proc/sys/kernel/core_pattern && AFL_BENCH_UNTIL_CRASH=1 afl-fuzz -i in -o out -- ./test_afl
