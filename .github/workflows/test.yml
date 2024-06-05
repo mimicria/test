@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build_and_fuzz:
 
     runs-on: ubuntu-latest
     container:
@@ -29,3 +29,8 @@ jobs:
 #          echo ${{ github.workspace }}
     - name: Fuzz
       run: afl-fuzz -i in -o out -- ./test_afl
+    - name: Archive out 
+      uses: actions/upload-artifact@v4
+      with:
+        name: fuzzdir
+        path: out
